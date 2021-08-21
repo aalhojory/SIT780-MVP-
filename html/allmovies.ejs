@@ -2,6 +2,30 @@
 <html>
 <head>
 <style>
+
+#movies {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#movies td, #movies th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#movies tr:nth-child(even){background-color: #f2f2f2;}
+
+#movies tr:hover {background-color: #ddd;}
+
+#movies th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -71,8 +95,8 @@ li  a:hover:not(.active) {
 <body>
 
 <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="/allmovies">All Movies</a></li>
+  <li><a href="/">Home</a></li>
+  <li><a class="active"  href="/allmovies">All Movies</a></li>
   <li><a >
     <form action="/logout" method="post" id="form-id">
     <div class="field" id="your-id">
@@ -83,26 +107,25 @@ li  a:hover:not(.active) {
 </ul>
 
 <div style="margin-left:25%">
-  <h1>Add Movie Information</h1>
-  <form action="/add-movie" method="post">
-    <label for="fname">Movie Name</label>
-    <input type="text" id="Name" name="Movie" placeholder="Movie name..">
-
-    <label for="lname">Movie Hero</label>
-    <input type="text" id="Hero" name="Hero" placeholder="Movie Hero..">
-    <label for="language">Movie Language</label>
-    <input type="text" id="language" name="language" placeholder="language..">
-    <label for="language">Movie Release Year</label>
-    <input type="text" id="year" name="year" placeholder="Year..">
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
-    </select>
+  <h1>All Movies Information</h1>
   
-    <input type="submit" value="Submit">
-  </form>
+<table id="movies">
+  <tr>
+    <th>Name</th>
+    <th>Hero</th>
+    <th>Language</th>
+    <th>Year</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  
+</table>
 </div>
 
 </body>

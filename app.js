@@ -6,7 +6,7 @@ app.use(express.json());
 
 
 
-
+app.use(express.static(__dirname + '/html'));
 
 
 app.use(express.static(__dirname));
@@ -135,7 +135,7 @@ app.use(passport.session());
 const mongoose =require('mongoose');
 const passportLocalMongoose=require('passport-local-mongoose');
 
-mongoose.connect('mongodb://localhost/MyDatabase',{
+mongoose.connect('mongodb+srv://abo:abo@cluster0.yr3fb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
   useNewUrlParser:true,useFindAndModify:true
 })
 
@@ -148,6 +148,18 @@ const UserDetail=new Schema({
 UserDetail.plugin(passportLocalMongoose);
 const UserDetails=mongoose.model('userInfo',UserDetail,'userInfo');
 
+
+const schema = new Schema(
+  {
+    Movie:{type: String},
+    Hero:{type:String},
+    language:{type:String},
+    year:{type:String},
+    country:{type:String}
+  }
+);
+
+const Movie = mongoose.model('movie', schema, 'movie');
 
 /*Passport LOCAL AUTHENTICATION*/
 
@@ -178,6 +190,9 @@ app.post('/login',(req,res,next)=>{
   })(req,res,next);
 });
 
+
+
+
 // Register
 app.post('/register', (req, res) => {
   console.log("body",req.body)
@@ -189,7 +204,8 @@ app.post('/register', (req, res) => {
   }
 
   if (password != password2) {
-    errors.push({ msg: 'Passwords do not match' });
+    errors.push({ msg: 'Passwords do not match' });y
+
   }
 
   if (password.length < 6) {
@@ -236,6 +252,22 @@ app.get('/login',
   {root:__dirname})
 );
 
+app.get('/allmovies', 
+  connectEnsureLogin.ensureLoggedIn(),
+  (req, res) =>{
+    
+  
+  
+      var Movies= Movie.find().sort({ _id: -1 }).limit(10)
+      console.log("body Movies", Movies);
+        res.sendFile('html/allmovies.html',
+        {data: { movies: Movies },root:__dirname})
+      
+    
+
+  
+  });
+
 app.get('/',
   connectEnsureLogin.ensureLoggedIn(),
   (req,res)=> res.sendFile('html/index.html',{root:__dirname})
@@ -255,3 +287,14 @@ app.get('/user',
   (req,res)=> res.sendFile('html/private.html',{root:__dirname})
 );
 
+app.post('/add-movie',(req,res)=>{
+  
+  console.log("body parsing", req.body);
+  mongoose.connection.collection("Movies").insertOne(req.body, function(err, resp) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    
+    res.sendFile('html/allmovies.html',
+    {root:__dirname})
+  });
+});
