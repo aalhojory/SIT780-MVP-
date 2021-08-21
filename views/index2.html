@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+
+
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+li  a:hover:not(.active) {
+  background-color: #555;
+  
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="/index">Home</a></li>
+  <li><a href="/allmovies">All Movies</a></li>
+  <li><a >
+    <form action="/logout" method="post" id="form-id">
+    <div class="field" id="your-id">
+      Log Out
+    </div>
+    </form>
+    </a></li>
+</ul>
+
+<div style="margin-left:25%">
+  <h1>Add Movie Information</h1>
+  <form action="/add-movie" method="post">
+    <label for="fname">Movie Name</label>
+    <input type="text" id="Name" name="Movie" placeholder="Movie name..">
+
+    <label for="lname">Movie Hero</label>
+    <input type="text" id="Hero" name="Hero" placeholder="Movie Hero..">
+    <label for="language">Movie Language</label>
+    <input type="text" id="language" name="language" placeholder="language..">
+    <label for="language">Movie Release Year</label>
+    <input type="text" id="year" name="year" placeholder="Year..">
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+<script>
+  var form = document.getElementById("form-id");
+
+document.getElementById("your-id").addEventListener("click", function () {
+  form.submit();
+});
+</script>
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title> Home </title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="message-box">
+    <h1 id="welcome-message"></h1>
+    <a href="/private">Go to private area</a>
+    <form action="/logout" method="post">
+        <div class="field">
+          <input class="submit-btn" type="submit" value="Logout" />
+        </div>
+    </form>
+  </div>
+
+
+  <script>
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        const user = JSON.parse(req.response).user;
+        document.getElementById("welcome-message").innerText = `Welcome ${user.username}!!`;
+      }
+    };
+    req.open("GET", "http://localhost:3000/user", true);
+    req.send();
+  </script>
+</body>
+</html>
+
+--> 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="static/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" action="/login" >
+                        <h2 class="form-title">Log In</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="username" id="username" placeholder="Username"/>
+                        </div>
+                      
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                       
+                     
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Log In"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Don't have already an account ? <a href="/register" class="loginhere-link">Sign Up here</a>
+                    </p>
+                </div>
+            </div>
+            <label id="error-message"></label>
+        </section>
+
+    </div>
+    
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const info = urlParams.get('info');
+  
+      if(info) {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerText = info;
+        errorMessage.style.display = "block";
+      }
+    </script>
+    <!-- JS -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Login </title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <form action="/login" method="post">
+    <div class="title">
+      <h3>Login</h3>
+    </div>
+    <div class="field">
+      <label>Username:</label>
+      <input type="text" name="username" />
+      <br />
+    </div>
+    <div class="field">
+      <label>Password:</label>
+      <input type="password" name="password" required />
+    </div>
+    <div class="field">
+      <input class="submit-btn" type="submit" value="Submit" required />
+    </div>
+    <label id="error-message"></label>
+  </form>
+  <div class="message-box">
+    <h1 id="logout"></h1>
+    <a href="/register">Register</a>
+  </div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const info = urlParams.get('info');
+
+    if(info) {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.innerText = info;
+      errorMessage.style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
+-->
